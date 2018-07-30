@@ -110,19 +110,25 @@ def save_file(url, name, folder, basedir='out', base_folder=''):
 
 def save_files(q, to_json, basedir='out'):
   rank = 1
+  information_csv = None
+  files_that_already_exist = []
+  if os.path.exists(basedir + '/metadata/info.csv'):
+    information_csv = pd.read_csv(basedir + '/metadata/info.csv')
+    files_that_already_exist = list(information_csv['UUID'])
   for item in to_json[0]:
-    for image in item['images'].keys():
-      types = item['images'][image].keys()
-      name = item['images'][image]
-      if not 'url' in types and not 'webp' in types:
-        save_file(name['mp4'], str(rank) + '_' + q + '_' + item['id'] + '.mp4', 'mp4', basedir, image)
-      elif not 'mp4' in types and not 'webp' in types:
-        save_file(name['url'], str(rank) + '_' + q + '_' + item['id'] + '.gif', 'url', basedir, image)
-      elif 'url' in types and 'webp' in types and not 'mp4' in types:
-        save_file(name['url'], str(rank) + '_' + q + '_' + item['id'] + '.gif', 'url', basedir, image)
-        save_file(name['webp'], str(rank) + '_' + q + '_' + item['id'] + '.webp', 'webp', basedir, image)
-      elif 'url' in types and 'webp' in types and 'mp4' in types:
-        save_file(name['url'], str(rank) + '_' + q + '_' + item['id'] + '.gif', 'url', basedir, image)
-        save_file(name['webp'], str(rank) + '_' + q + '_' + item['id'] + '.webp', 'webp', basedir, image)
-        save_file(name['mp4'], str(rank) + '_' + q + '_' + item['id'] + '.mp4', 'mp4', basedir, image)
+    if not item['id'] in files_that_already_exist:
+      for image in item['images'].keys():
+        types = item['images'][image].keys()
+        name = item['images'][image]
+        if not 'url' in types and not 'webp' in types:
+          save_file(name['mp4'], str(rank) + '_' + q + '_' + item['id'] + '.mp4', 'mp4', basedir, image)
+        elif not 'mp4' in types and not 'webp' in types:
+          save_file(name['url'], str(rank) + '_' + q + '_' + item['id'] + '.gif', 'url', basedir, image)
+        elif 'url' in types and 'webp' in types and not 'mp4' in types:
+          save_file(name['url'], str(rank) + '_' + q + '_' + item['id'] + '.gif', 'url', basedir, image)
+          save_file(name['webp'], str(rank) + '_' + q + '_' + item['id'] + '.webp', 'webp', basedir, image)
+        elif 'url' in types and 'webp' in types and 'mp4' in types:
+          save_file(name['url'], str(rank) + '_' + q + '_' + item['id'] + '.gif', 'url', basedir, image)
+          save_file(name['webp'], str(rank) + '_' + q + '_' + item['id'] + '.webp', 'webp', basedir, image)
+          save_file(name['mp4'], str(rank) + '_' + q + '_' + item['id'] + '.mp4', 'mp4', basedir, image)
     rank += 1
