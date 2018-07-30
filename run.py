@@ -49,6 +49,32 @@ try:
     save_files(q, to_json, out_dir)
     end = time.time()
     print("Took " + str(end - start) + " seconds to save gifs.")
+    if not os.path.exists(out_dir + '/metadata/info.csv'):
+        columns = ["UUID", "Query", "Rank"]
+        information_csv = pd.DataFrame(columns=columns)
+        rank = 1
+        count = 0
+        for item in api_response.data:
+            information_csv.loc[count, 'UUID'] = item.id
+            information_csv.loc[count, 'Query'] = q
+            information_csv.loc[count, 'Rank'] = rank
+            rank += 1
+            count += 1
+        information_csv.to_csv(out_dir + '/metadata/info.csv', columns = columns)
+    else:
+        information_csv = pd.read_csv(out_dir + '/metadata/info.csv', columns = columns)
+        columns = information_csv.columns
+        rank = 1
+        files_that_already_exist = list(information_csv['UUID'])
+        count = len(files_that_already_exist)
+        for item in api_response.data:
+            if not item.id in files_that_already_exist:
+                information_csv.loc[count, 'UUID'] = item.id
+                information_csv.loc[count, 'Query'] = q
+                information_csv.loc[count, 'Rank'] = rank
+                count += 1
+            rank += 1
+        information_csv.to_csv(out_dir + '/metadata/info.csv', columns = columns)
     print("Found " + str(len(api_response.data)) + " gifs for the query '" + q + ".'")
 except ApiException as e:
     print("Exception when calling DefaultApi->gifs_search_get: %s\n" % e)
