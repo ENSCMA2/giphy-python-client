@@ -83,6 +83,8 @@ def make_dirs(basedir='out'):
   mp4 = ['downsized_small', 'looping', 'preview']
   if not os.path.isdir(basedir):
     os.mkdir(basedir)
+  if not os.path.isdir(basedir + '/metadata'):
+    os.mkdir(basedir + '/metadata')
   for item in save_types:
     if not os.path.isdir(basedir+'/'+item):
       os.mkdir(basedir+'/'+item)
