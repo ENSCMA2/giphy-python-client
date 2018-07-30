@@ -42,7 +42,7 @@ try:
     end = time.time()
     print("Took " + str(end - start) + " seconds to create metadata.")
     start = time.time()
-    json.dump(to_json, open(q + '_metadata.json', 'w+'))
+    json.dump(to_json, open(out_dir + '/metadata/' + q + '_metadata.json', 'w+'))
     end = time.time()
     print("Took " + str(end - start) + " seconds to dump metadata to json.")
     start = time.time()
