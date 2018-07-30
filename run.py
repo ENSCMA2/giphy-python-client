@@ -62,8 +62,9 @@ try:
             count += 1
         information_csv.to_csv(out_dir + '/metadata/info.csv', columns = columns)
     else:
-        information_csv = pd.read_csv(out_dir + '/metadata/info.csv', columns = columns)
-        columns = information_csv.columns
+        information_csv = pd.read_csv(out_dir + '/metadata/info.csv')
+        columns = ['UUID', 'Query', 'Rank']
+        information_csv = information_csv[columns]
         rank = 1
         files_that_already_exist = list(information_csv['UUID'])
         count = len(files_that_already_exist)
