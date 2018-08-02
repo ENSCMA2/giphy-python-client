@@ -13,8 +13,8 @@ python run.py [-q, --queries QUERIES]
 			  [-s, --offset OFFSET]
 
 Arguments:
-	-q, --queries QUERIES 			search term(s) to use, separate different terms by comma with NO SPACE, use + signs as spaces for phrases
-	-l, --limit LIMIT 			maximum number of gifs to save PER QUERY
+	-q, --queries QUERIES 		search term(s) to use, separate different terms by comma with NO SPACE, use + signs as spaces for phrases
+	-l, --limit LIMIT 		maximum number of gifs to save PER QUERY
 	-o, --outdir OUTDIR 		name of the directory under which all gifs will be saved
 	-s, --offset OFFSET		max offset of the search, defaults to 0; can be between 0 and 100, but should be a multiple of 25 or a multiple of the limit; e.g. if offset = 50, it gets 25 gifs starting from the 1st result, another 25 starting from the 26th result, and another 25 starting from the 51st result; so total number of results returned is limit + offset
 ```
