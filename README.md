@@ -4,7 +4,7 @@ This script will scrape GIFs from GIPHY and save them by video & image type. Thi
 
 This script uses the GIPHY Python client from https://github.com/Giphy/giphy-python-client.
 
-# Usage
+## Usage
 
 ```sh
 python run.py [-q, --queries QUERIES]
