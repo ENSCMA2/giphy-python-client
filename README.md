@@ -1,6 +1,6 @@
 # GIPHY Scraper
 
-This script will scrape GIFs from GIPHY and save them by video & image type. This script also creates a JSON file with the metadata for the GIFS fetched for each query as well as a CSV file that stores UUID, query, and rank and is used to check for duplicates (and not save them again). GIFs are saved as [rank]\_[query]\_[id].[ext]. Each GIF is saved inside [image type]/[file type]  (e.g. 'original/mp4').
+This script will scrape GIFs from GIPHY and save them by video & image type. This script also creates a JSON file with the metadata for the GIFS fetched for each query as well as a CSV file that stores UUID, query, and rank and is used to check for duplicates (and not save them again). GIFs are saved as `[rank]\_[query]\_[id].[ext]`. Each GIF is saved inside `[image type]/[file type]`  (e.g. `original/mp4`).
 
 This script uses the GIPHY Python client from https://github.com/Giphy/giphy-python-client.
 
